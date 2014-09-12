@@ -10,3 +10,17 @@ Then you type all the files you want to run (Python use stdin). When typing, sep
 The program after executes all matches will make a file called 'standing.txt' returns how many points each player gets.
 
 This program can run '.py' and '.exe' So for C and C++, you need to compile it manually before you run it.
+
+FAQ:
+
+Q: I saw '[""]' appearings, what does this means?
+
+A: It can either means
+
+>Your program doesn't exist (Make sure you typed it correctly).
+
+>Timeout.
+
+>Compile Run or Run Time Error.
+
+>Your program failed to give output.
