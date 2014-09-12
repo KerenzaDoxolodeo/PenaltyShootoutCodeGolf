@@ -3,8 +3,6 @@ from threading import Timer
 from sys import executable,argv,stdin
 from random import randint
 
-myFile=open("log.log","w")
-
 def run(file,cmd): #This is the guy who gives YOUR program the STDIN. All kneel to him!
   proc = subprocess.Popen(file, stdout=subprocess.PIPE, 
     stderr=subprocess.PIPE, stdin=subprocess.PIPE)
@@ -25,7 +23,7 @@ def validAnswer(input):
         print input
         return failedReturn
     try:
-        input =[int(i) for i in input]
+        k =[int(i) for i in input]
     except valueError:
         print input
         return failedReturn
@@ -61,7 +59,6 @@ leaderboard=[int(0) for i in path]
 
 for a in range(0,len(path)):
     for b in range(a+1,len(path)):
-        myFile.write(c[a]+" "+c[b])
         digits=[a,b]
         score=[0,0]
         move=[[],[],[],[],[],[],[],[]]#Keeps list. X attack from P1, Y P1, X defend P1, soon]
@@ -81,16 +78,15 @@ for a in range(0,len(path)):
             for x in range(2):
                 xWind=randint(-50,50)# The wind
                 yWind=randint(-50,50)
-                xFinal=answer[x][0]+xWind #Ball final coordinate after the wind
-                yFinal=answer[x][1]+yWind
-                xKeeper=answer[(x+1)%2][2]
-                yKeeper=answer[(x+1)%2][3]
+                xFinal=int(answer[x][0])+xWind #Ball final coordinate after the wind
+                yFinal=int(answer[x][1])+yWind
+                xKeeper=int(answer[(x+1)%2][2])
+                yKeeper=int(answer[(x+1)%2][3])
                 score[x]+=calculateDistance([xFinal,yFinal],[xKeeper,yKeeper])and 0<=xFinal<=700 and 0<=yFinal<=200
                 move[(x*4)].append(answer[x][0])
                 move[(x*4)+1].append(answer[x][1])
                 move[((x+1)%2*4)+2].append(answer[(x+1)%2][2])
                 move[((x+1)%2*4)+3].append(answer[(x+1)%2][3])
-                myFile.write(c[digits[x]]+" "+" ".join([str(xFinal),str(yFinal),str(xKeeper),str(yKeeper)])+"\n")
             if abs(score[0]-score[1])>10-round:
                 break
         if score[0]>score[1]:
@@ -108,4 +104,4 @@ myLeaderBoardFile=open("standing.txt","w")
 for k in range(len(c)):
     print c[k]+" "+str(leaderboard[k])
     myLeaderBoardFile.write(c[k]+" "+str(leaderboard[k])+"\n")
-myFile.close()
+myLeaderBoardFile.close()
